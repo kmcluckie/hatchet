@@ -12,7 +12,7 @@
 
         @vite(['resources/js/app.ts'])
     </head>
-    <body class="antialiased">
+    <body class="antialiased bg-slate-50">
         <div id="app"></div>
     </body>
 </html>
