@@ -39,7 +39,7 @@ The UI is provided by the `App.vue` component, though it delegates table display
 
 To see the loading spinner adding a `sleep()` cal to the `LocationController` may be necessary.
 
-Tests are available for the `LocationController`. Run with `sail artisan tests`.
+Tests are available for the `LocationController`. Run with `sail artisan test`.
 
 ## Notes
 
