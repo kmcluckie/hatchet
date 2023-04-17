@@ -54,7 +54,10 @@
                 />
             </div>
         </form>
-        <LocationList :locations="locations"></LocationList>
+        <div v-if="locations.length == 0" class="text-amber-600 rounded-md">
+            No results found.
+        </div>
+        <LocationList v-else :locations="locations"></LocationList>
     </div>
 </template>
 
