@@ -81,14 +81,16 @@ onMounted(async () => {
 
 const getLocations = async () => {
     loading.value = true;
-    const response = await fetch(
-        "/locations?" +
-            new URLSearchParams(
-                Object.entries(filters.value).filter(
-                    ([key, value]) => value !== "" && value !== null
-                )
-            )
-    );
+
+    // Filter filter params so that they do not include nulls or empty strings
+    const params: string[][] = [];
+    for (const [key, value] of Object.entries(filters.value)) {
+        if (value !== null && value !== "") {
+            params.push([key, value]);
+        }
+    }
+
+    const response = await fetch("/locations?" + new URLSearchParams(params));
     locations.value = await response.json();
     loading.value = false;
 };
