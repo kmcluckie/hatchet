@@ -54,10 +54,7 @@
                 />
             </div>
         </form>
-        <div v-if="locations.length == 0" class="text-amber-600 rounded-md">
-            No results found.
-        </div>
-        <LocationList v-else :locations="locations"></LocationList>
+        <LocationList :locations="locations" :loading="loading"></LocationList>
     </div>
 </template>
 
@@ -67,6 +64,7 @@ import LocationList from "@/components/location-list.vue";
 import type { Location } from "@/types/types";
 
 const locations = ref<Location[]>([]);
+const loading = ref(false);
 const filters = ref({
     name: null,
     offices: null,
@@ -82,6 +80,7 @@ onMounted(async () => {
 });
 
 const getLocations = async () => {
+    loading.value = true;
     const response = await fetch(
         "/locations?" +
             new URLSearchParams(
@@ -91,6 +90,7 @@ const getLocations = async () => {
             )
     );
     locations.value = await response.json();
+    loading.value = false;
 };
 
 const submit = (event: Event) => {
